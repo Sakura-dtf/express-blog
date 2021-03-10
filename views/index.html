@@ -1,0 +1,65 @@
+<%- include('header.html') -%>
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="holder.js/100px400?text=图一&random=yes" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+            <img src="holder.js/100px400?text=图二&random=yes" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+            <img src="holder.js/100px400?text=图三&random=yes" class="d-block w-100" alt="...">
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </a>
+</div>
+
+<div class="container mt-5">
+    <h2 class="mb-4">热门推荐</h2>
+    <div class="card-deck">
+        <% hots.forEach(hot => { %>
+        <div class="card">
+            <img src="<%= hot.thumbnail %>" data-src="holder.js/100px200" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title"><%= hot.title %></h5>
+                <p class="card-text"><small class="text-muted"><%= hot.time.toLocaleString() %></small></p>
+                <p class="card-text"><%= hot.content.replace(/<[^>]+>/g,'').substring(0,100) %>...</p>
+            </div>
+            <div class="card-footer bg-white border-0">
+                <a href="/article/<%= hot.id %>" class="btn btn-primary float-right stretched-link">查看详情</a>
+            </div>
+        </div>
+        <% }) %>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <h2 class="mb-4">最新博文</h2>
+    <div class="row row-cols-4">
+        <% articles.forEach(article => { %>
+        <div class="col my-3">
+            <div class="card h-100">
+                <img src="<%= article.thumbnail %>" data-src="holder.js/100px200" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title"><%= article.title %></h5>
+                    <p class="card-text"><small class="text-muted"><%= article.time.toLocaleString() %></small></p>
+                    <p class="card-text"><%= article.content.replace(/<[^>]+>/g,'').substring(0,100) %></p>
+                    <a href="/article/<%= article.id %>" class="stretched-link"></a>
+                </div>
+            </div>
+        </div>
+        <% }) %>
+    </div>
+</div>
+
+<%- include('footer.html') -%>
